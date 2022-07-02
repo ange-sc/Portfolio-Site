@@ -1,4 +1,7 @@
 const navBar = document.querySelectorAll('.nav-bar li')
+const burger = document.querySelector('.burger')
+const modal = document.querySelector('.modal')
+const mobileNav = document.querySelectorAll('nav li')
 
 function createSection() {
     let newSection = document.createElement('section')
@@ -73,16 +76,16 @@ function resizePage(divOne, divTwo, buttonOne, buttonTwo) {
         if (isSmall == true) {
             buttonOne.addEventListener('click', () => {
                 if (divOne.classList.contains('hide')) {
-                    console.log('video == hide')
                     divOne.classList.toggle('hide')
                     divTwo.classList.toggle('hide')
+                    console.log('button ONE clicked')
                 }
             })
             buttonTwo.addEventListener('click', () => {
                 if (divTwo.classList.contains('hide')) {
-                    console.log('video == hide')
                     divOne.classList.toggle('hide')
                     divTwo.classList.toggle('hide')
+                    console.log('button TWO clicked')
                 }
             })
         } else if (isBig == true) {
@@ -93,8 +96,24 @@ function resizePage(divOne, divTwo, buttonOne, buttonTwo) {
     observeWidth.observe(containerWidth)
 }
 
+/* Burger */
+burger.addEventListener('click', () => {
+    modal.classList.toggle('modal-active')
+    mobileNav.forEach(nav => {
+        nav.classList.toggle('nav-active')
+    })
+})
+
 navBar.forEach(nav => {
     nav.addEventListener('click', () => {
+        
+        /* Mobile */
+        navBar.forEach(nav => {
+            nav.classList.remove('nav-active')
+            modal.classList.remove('modal-active')
+        })
+        /* End Mobiel */
+
         if(nav.title === nav) return
         document.querySelector('section').classList.add('fade-out')
         setTimeout(() => {
@@ -139,6 +158,8 @@ navBar.forEach(nav => {
 
                 resizePage(audioDiv, videoDiv, audioBtn, videoBtn)
 
+                
+
             } else if (nav.title == 'sound') {
                 document.querySelector('section').innerHTML = 
                 `<h2>Sound &amp; Video Reel</h2>
@@ -157,6 +178,7 @@ navBar.forEach(nav => {
                 <p><a href="https://vimeo.com/544741777">Video Editing Reel 2020</a></p>
                 </div>
                 </div>`
+                
                 pageLoad()
 
                 const soundDiv = document.querySelector('.sound-reel')
@@ -170,6 +192,9 @@ navBar.forEach(nav => {
                 document.querySelector('section').innerHTML = 
                 `<h2>Credits</h2>
                 <div class="credits-container">
+                    <li>2022 Strong Fathers, Strong Daughters <span class="credits-additional">(additional programming)</span></li>
+                    <li>2022 Last Piece of the Fallen Leaf <span class="credits-additional">(composer)</span></li>
+                    <li>2022 Ashtray <span class="credits-additional">(re-recording mixer)</span></li>
                     <li>2021 Construction <span class="credits-additional">(additional orchestrations)</span></li>
                     <li>2021 The Holiday Fix Up <span class="credits-additional">(composer assistant)</span></li>
                     <li>2021 God's Not Dead: We the People <span class="credits-additional">(composer assistant)</span></li>
@@ -177,7 +202,7 @@ navBar.forEach(nav => {
                     <li>2021 The Letter <span class="credits-additional">(composer</span></li>
                     <li>2021 Paper Tiger <span class="credits-additional">(composer</span></li>
                     <li>2020 Be the Light <span class="credits-additional">(Score Preparation)</span></li>
-                    <li>2020 Summer Happiness <span class="credits-additional">(composer) / (re-recording mixer</span></li>
+                    <li>2020 Summer Happiness <span class="credits-additional">(composer) / (re-recording mixer)</span></li>
                     <li>2019 We Live <span class="credits-additional">(composer)</span></li>
                     <li>2019 Hollywood Fringe Forever <span class="credits-additional">(composer)</span></li>
                     <li>2019 Come Into Your Own <span class="credits-additional">(composer)</span></li>
@@ -203,10 +228,7 @@ navBar.forEach(nav => {
             else if (nav.title == 'web') {
                 document.querySelector('section').innerHTML = 
                 `<h2>Web</h2>
-                <h4>Website stuff</h4>
-                <div class="weatherapi">
-                
-                </div
+                <p>Coming Soon</p>
                 `
                 pageLoad()
             }
@@ -217,6 +239,7 @@ navBar.forEach(nav => {
                 <div class="contact-container">
                 <li>(310) 344-3084</li>
                 <li>andrew.wentzel@icloud.com</li>
+                <!--
                 <form action="">
                 <li>
                     <p>Name:</p>
@@ -238,6 +261,7 @@ navBar.forEach(nav => {
                     <button>Submit</button>
                 </li>
                 </form>
+                -->
                 </div>`
                 pageLoad()
             }  else if (nav.title == 'imdb') {
@@ -246,5 +270,3 @@ navBar.forEach(nav => {
         }, 700);
     })
 })
-
-
